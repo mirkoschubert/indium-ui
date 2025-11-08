@@ -1,8 +1,8 @@
-# @indium/ui
+# indium-ui
 
 > Semantic component library for Svelte 5 with accessible, themeable components and integrated CSS framework
 
-[![npm version](https://img.shields.io/npm/v/@indium/ui.svg)](https://www.npmjs.com/package/@indium/ui)
+[![npm version](https://img.shields.io/npm/v/indium-ui.svg)](https://www.npmjs.com/package/indium-ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## 🚧 Work in Progress
@@ -23,21 +23,21 @@ This library is currently in early development. The API may change frequently un
 
 ```bash
 # pnpm (recommended)
-pnpm add @indium/ui
+pnpm add indium-ui
 
 # npm
-npm install @indium/ui
+npm install indium-ui
 
 # yarn
-yarn add @indium/ui
+yarn add indium-ui
 ```
 
 ## Quick Start
 
 ```svelte
 <script>
-  import { Button } from '@indium/ui';
-  import '@indium/ui/styles';
+  import { Button } from 'indium-ui';
+  import 'indium-ui/styles';
 </script>
 
 <Button variant="primary" size="md">
@@ -52,8 +52,8 @@ Initialize the theme in your root layout:
 ```svelte
 <!-- +layout.svelte -->
 <script>
-  import { initTheme } from '@indium/ui/theme';
-  import '@indium/ui/styles';
+  import { initTheme } from 'indium-ui/theme';
+  import 'indium-ui/styles';
 
   // Initialize theme on mount
   $effect(() => {
@@ -88,7 +88,7 @@ _More components coming soon..._
 ## Theme Customization
 
 ```typescript
-import { applyTheme } from '@indium/ui/theme';
+import { applyTheme } from 'indium-ui/theme';
 
 applyTheme({
   'color-action-primary': '#ff6b6b',
@@ -100,7 +100,7 @@ applyTheme({
 ## Dark Mode
 
 ```typescript
-import { setThemeMode, getThemeMode, toggleTheme } from '@indium/ui/theme';
+import { setThemeMode, getThemeMode, toggleTheme } from 'indium-ui/theme';
 
 // Set theme mode
 setThemeMode('dark');   // Force dark mode

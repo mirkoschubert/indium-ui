@@ -1,5 +1,5 @@
 {
-	"name": "@indium/ui",
+	"name": "indium-ui",
 	"version": "0.0.1",
 	"description": "Semantic component library for Svelte 5 with accessible, themeable components and integrated CSS framework",
 	"author": "Mirko Schubert",

@@ -6,26 +6,26 @@
 
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/svelte';
-import Button from './Button.svelte';
+import ButtonTest from './ButtonTest.test.svelte';
 
 describe('Button', () => {
   it('renders with default props', () => {
-    const { container } = render(Button, {
+    const { container } = render(ButtonTest, {
       props: {
-        children: () => 'Click me'
+        text: 'Click me'
       }
     });
 
     const button = container.querySelector('button');
     expect(button).toBeTruthy();
-    expect(button?.textContent).toBe('Click me');
+    expect(button?.textContent?.trim()).toBe('Click me');
   });
 
   it('applies variant classes correctly', () => {
-    const { container } = render(Button, {
+    const { container } = render(ButtonTest, {
       props: {
         variant: 'secondary',
-        children: () => 'Button'
+        text: 'Button'
       }
     });
 
@@ -34,10 +34,10 @@ describe('Button', () => {
   });
 
   it('applies size classes correctly', () => {
-    const { container } = render(Button, {
+    const { container } = render(ButtonTest, {
       props: {
         size: 'lg',
-        children: () => 'Button'
+        text: 'Button'
       }
     });
 
@@ -46,10 +46,10 @@ describe('Button', () => {
   });
 
   it('disables button when disabled prop is true', () => {
-    const { container } = render(Button, {
+    const { container } = render(ButtonTest, {
       props: {
         disabled: true,
-        children: () => 'Button'
+        text: 'Button'
       }
     });
 
@@ -58,10 +58,10 @@ describe('Button', () => {
   });
 
   it('shows loading spinner when loading', () => {
-    const { container } = render(Button, {
+    const { container } = render(ButtonTest, {
       props: {
         loading: true,
-        children: () => 'Button'
+        text: 'Button'
       }
     });
 
@@ -73,10 +73,10 @@ describe('Button', () => {
   });
 
   it('applies fullWidth class when fullWidth is true', () => {
-    const { container } = render(Button, {
+    const { container } = render(ButtonTest, {
       props: {
         fullWidth: true,
-        children: () => 'Button'
+        text: 'Button'
       }
     });
 
@@ -85,10 +85,10 @@ describe('Button', () => {
   });
 
   it('applies custom className', () => {
-    const { container } = render(Button, {
+    const { container } = render(ButtonTest, {
       props: {
         class: 'custom-class',
-        children: () => 'Button'
+        text: 'Button'
       }
     });
 
@@ -97,10 +97,10 @@ describe('Button', () => {
   });
 
   it('sets button type correctly', () => {
-    const { container } = render(Button, {
+    const { container } = render(ButtonTest, {
       props: {
         type: 'submit',
-        children: () => 'Button'
+        text: 'Button'
       }
     });
 
