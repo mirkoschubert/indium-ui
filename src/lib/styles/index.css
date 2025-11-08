@@ -1,0 +1,22 @@
+/**
+ * Indium UI Styles
+ *
+ * Main stylesheet bundle for the Indium UI component library.
+ * Import this file to get all base styles, tokens, and themes.
+ *
+ * Usage:
+ * import '@indium/ui/styles';
+ */
+
+/* Design Tokens */
+@import './tokens.css';
+
+/* CSS Reset & Base */
+@import './reset.css';
+
+/* Themes */
+@import './themes/light.css';
+@import './themes/dark.css';
+
+/* Component Styles */
+@import './components/button.css';

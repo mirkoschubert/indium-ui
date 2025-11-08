@@ -1,0 +1,110 @@
+{
+	"name": "@indium/ui",
+	"version": "0.0.1",
+	"description": "Semantic component library for Svelte 5 with accessible, themeable components and integrated CSS framework",
+	"author": "Mirko Schubert",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mirkoschubert/indium-ui.git"
+	},
+	"homepage": "https://github.com/mirkoschubert/indium-ui#readme",
+	"bugs": {
+		"url": "https://github.com/mirkoschubert/indium-ui/issues"
+	},
+	"keywords": [
+		"svelte",
+		"svelte5",
+		"component-library",
+		"ui-components",
+		"design-system",
+		"accessibility",
+		"a11y",
+		"semantic-css",
+		"theming",
+		"dark-mode"
+	],
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build && npm run prepack",
+		"preview": "vite preview",
+		"prepare": "svelte-kit sync || echo ''",
+		"prepack": "svelte-kit sync && svelte-package && publint",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"test:unit": "vitest",
+		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test:e2e": "playwright test",
+		"storybook": "storybook dev -p 6006",
+		"build-storybook": "storybook build"
+	},
+	"files": [
+		"dist",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		},
+		"./styles": {
+			"default": "./dist/styles/index.css"
+		},
+		"./theme": {
+			"types": "./dist/utils/theme.d.ts",
+			"default": "./dist/utils/theme.js"
+		}
+	},
+	"peerDependencies": {
+		"svelte": "^5.0.0"
+	},
+	"devDependencies": {
+		"@axe-core/playwright": "^4.11.0",
+		"@chromatic-com/storybook": "^4.1.2",
+		"@eslint/compat": "^1.4.0",
+		"@eslint/js": "^9.38.0",
+		"@playwright/test": "^1.56.1",
+		"@storybook/addon-a11y": "^10.0.6",
+		"@storybook/addon-docs": "^10.0.6",
+		"@storybook/addon-svelte-csf": "^5.0.10",
+		"@storybook/addon-vitest": "^10.0.6",
+		"@storybook/sveltekit": "^10.0.6",
+		"@sveltejs/adapter-auto": "^7.0.0",
+		"@sveltejs/kit": "^2.47.1",
+		"@sveltejs/package": "^2.5.4",
+		"@sveltejs/vite-plugin-svelte": "^6.2.1",
+		"@testing-library/svelte": "^5.2.8",
+		"@types/node": "^22",
+		"@vitest/browser-playwright": "^4.0.5",
+		"eslint": "^9.38.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-plugin-storybook": "^10.0.6",
+		"eslint-plugin-svelte": "^3.12.4",
+		"globals": "^16.4.0",
+		"playwright": "^1.56.1",
+		"prettier": "^3.6.2",
+		"prettier-plugin-svelte": "^3.4.0",
+		"publint": "^0.3.14",
+		"storybook": "^10.0.6",
+		"svelte": "^5.41.0",
+		"svelte-check": "^4.3.3",
+		"typescript": "^5.9.3",
+		"typescript-eslint": "^8.46.1",
+		"vite": "^7.1.10",
+		"vitest": "^4.0.5",
+		"vitest-browser-svelte": "^2.0.1"
+	},
+	"packageManager": "pnpm@10.20.0",
+	"dependencies": {
+		"lucide-svelte": "^0.553.0"
+	}
+}

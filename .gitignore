@@ -1,0 +1,40 @@
+test-results
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+/dist
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# Storybook
+*storybook.log
+storybook-static
+
+# Claude AI
+.claude/
+CLAUDE.md
+module-1-components.md
+module-2-css-framework.md
+
+# Package manager
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
