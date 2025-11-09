@@ -154,7 +154,7 @@ export function loadConfigSync(cwd: string = process.cwd()): IndiumConfig {
  * @returns True if valid, throws error if invalid
  */
 export function validateConfig(config: any): config is IndiumConfig {
-  if (typeof config !== 'object' || config === null) {
+  if (typeof config !== 'object' || config === null || Array.isArray(config)) {
     throw new Error('Config must be an object');
   }
 
