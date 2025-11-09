@@ -15,8 +15,8 @@ import {
   generatePrimitiveVariables,
   hexToRgb,
   normalizeAlpha,
-} from './render-helpers.js';
-import type { Primitives, PrimitiveColors, SemanticHeadingTypography } from './types.js';
+} from '../render-helpers.js';
+import type { Primitives, PrimitiveColors, SemanticHeadingTypography } from '../types.js';
 
 // ==========================================
 // TEST DATA
