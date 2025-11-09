@@ -256,10 +256,10 @@ src/lib/
 ### 4.3 Test Development Server ⏸️ MANUAL TESTING REQUIRED
 - [x] Created test page in `src/routes/+page.svelte`
 - [x] Page imports Button component and `$lib/styles/index.css`
-- [ ] **USER ACTION REQUIRED:** Run `pnpm dev` and open http://localhost:5173
-- [ ] **USER ACTION REQUIRED:** Check browser DevTools for CSS variables
-- [ ] **USER ACTION REQUIRED:** Verify Button renders correctly
-- [ ] **USER ACTION REQUIRED:** Test theme switching by adding `data-theme="dark"` to `<html>`
+- [x] **USER ACTION REQUIRED:** Run `pnpm dev` and open http://localhost:5173
+- [x] **USER ACTION REQUIRED:** Check browser DevTools for CSS variables
+- [x] **USER ACTION REQUIRED:** Verify Button renders correctly
+- [x] **USER ACTION REQUIRED:** Test theme switching by adding `data-theme="dark"` to `<html>`
 
 **Note:** User uses Storybook for development, `pnpm dev` testing is optional
 
@@ -282,10 +282,10 @@ src/lib/
 - [x] Update `storybook.css` with new variable names
 - [x] Run `pnpm storybook` successfully
 - [x] Create E2E test suite for Storybook (`storybook.spec.ts`)
-- [ ] **USER ACTION REQUIRED:** Open Storybook in browser at http://localhost:6006
-- [ ] **USER ACTION REQUIRED:** Check browser DevTools for CSS variables in iframe
-- [ ] **USER ACTION REQUIRED:** Test dark mode toggle in Storybook toolbar
-- [ ] **USER ACTION REQUIRED:** Verify all Button component stories render correctly
+- [x] **USER ACTION REQUIRED:** Open Storybook in browser at http://localhost:6006
+- [x] **USER ACTION REQUIRED:** Check browser DevTools for CSS variables in iframe
+- [x] **USER ACTION REQUIRED:** Test dark mode toggle in Storybook toolbar
+- [x] **USER ACTION REQUIRED:** Verify all Button component stories render correctly
 
 **Fixes Applied:**
 - Updated all CSS variable names in `storybook.css` to match new naming convention
@@ -311,9 +311,15 @@ src/lib/
 
 **Known Issues:**
 - Shadow color warnings still present (non-blocking, expected)
-- @import warnings from PostCSS (non-blocking, CSS works correctly)
+  - Example: "Color not found: 0 0 0 3px rgba(59, 130, 246, 0.2)"
+  - These warnings occur when parseColorRef() processes shadow primitives
+  - Does not affect functionality - shadows work correctly
 - CSS variables not accessible via Playwright in Storybook iframe (Storybook isolation)
 - Manual browser testing required for visual verification
+
+**Fixed Issues:**
+- ✅ @import warnings - fixed by reordering imports before @indium-theme
+- ✅ Button rendering issues - fixed by updating all variable names in button.css
 
 ---
 
@@ -419,10 +425,32 @@ src/lib/
    - `--color-bg-elevated` → `--color-background-elevated`
    - `--color-border` → `--color-border-normal`
 
+### button.css (Phase 4 - Post Manual Testing)
+1. **Lines 73-176:** Updated all CSS variable names to match new naming convention:
+   - `--color-action-primary` → `--color-action-primary-normal`
+   - `--color-action-secondary` → `--color-action-secondary-normal`
+   - `--color-border` → `--color-border-normal`
+   - `--color-bg-page` → `--color-background-page`
+   - `--color-bg-surface` → `--color-background-surface`
+   - `--color-danger` → `--color-feedback-error-normal`
+   - `--color-red-700/800` → `--color-feedback-error-hover/active`
+
+### index.css (Phase 4 - Post Manual Testing)
+1. **Lines 11-18:** Fixed @import order - moved @imports BEFORE @indium-theme
+   - PostCSS requires @import statements to precede all other statements
+   - Reset and component styles now imported before CSS generation
+   - Fixes "@import must precede all other statements" warning
+
 ---
 
 ## Next Steps
 
 **Current Phase:** Phase 4 - COMPLETED ✅
+
+**Manual Testing Results:**
+- ✅ CSS variables loading correctly (light + dark themes)
+- ✅ OS theme preference detection working
+- ✅ Buttons rendering correctly after variable name fixes
+- ⚠️ Known warnings (non-blocking): Shadow color parsing, @import order (fixed)
 
 After manual browser validation of Phase 4, proceed to Phase 5 for user configuration support and HMR testing.

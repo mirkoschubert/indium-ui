@@ -29,7 +29,7 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: var(--color-bg-page);
+  background-color: var(--color-background-page);
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -88,6 +88,7 @@ button,
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button;
+  appearance: button;
   background-color: transparent;
   background-image: none;
 }

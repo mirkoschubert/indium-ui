@@ -72,9 +72,9 @@
 
 /* Variant: Primary */
 .button-primary {
-  background-color: var(--color-action-primary);
+  background-color: var(--color-action-primary-normal);
   color: white;
-  border-color: var(--color-action-primary);
+  border-color: var(--color-action-primary-normal);
 }
 
 .button-primary:hover:not(:disabled) {
@@ -89,9 +89,9 @@
 
 /* Variant: Secondary */
 .button-secondary {
-  background-color: var(--color-action-secondary);
+  background-color: var(--color-action-secondary-normal);
   color: white;
-  border-color: var(--color-action-secondary);
+  border-color: var(--color-action-secondary-normal);
 }
 
 .button-secondary:hover:not(:disabled) {
@@ -108,13 +108,13 @@
 .button-outline {
   background-color: transparent;
   color: var(--color-text-primary);
-  border-color: var(--color-border);
+  border-color: var(--color-border-normal);
 }
 
 .button-outline:hover:not(:disabled) {
-  background-color: var(--color-action-primary);
+  background-color: var(--color-action-primary-normal);
   color: var(--color-text-inverse);
-  border-color: var(--color-action-primary);
+  border-color: var(--color-action-primary-normal);
 }
 
 .button-outline:active:not(:disabled) {
@@ -126,8 +126,8 @@
 .button-outline:focus-visible {
   outline: none;
   box-shadow:
-    0 0 0 2px var(--color-bg-page),
-    0 0 0 4px var(--color-action-primary);
+    0 0 0 2px var(--color-background-page),
+    0 0 0 4px var(--color-action-primary-normal);
 }
 
 /* Variant: Ghost */
@@ -138,28 +138,28 @@
 }
 
 .button-ghost:hover:not(:disabled) {
-  background-color: var(--color-bg-surface);
+  background-color: var(--color-background-surface);
 }
 
 .button-ghost:active:not(:disabled) {
-  background-color: var(--color-border);
+  background-color: var(--color-border-normal);
 }
 
 /* Variant: Danger */
 .button-danger {
-  background-color: var(--color-danger);
+  background-color: var(--color-feedback-error-normal);
   color: white;
-  border-color: var(--color-danger);
+  border-color: var(--color-feedback-error-normal);
 }
 
 .button-danger:hover:not(:disabled) {
-  background-color: var(--color-red-700);
-  border-color: var(--color-red-700);
+  background-color: var(--color-feedback-error-hover);
+  border-color: var(--color-feedback-error-hover);
 }
 
 .button-danger:active:not(:disabled) {
-  background-color: var(--color-red-800);
-  border-color: var(--color-red-800);
+  background-color: var(--color-feedback-error-active);
+  border-color: var(--color-feedback-error-active);
 }
 
 /* Disabled state */
