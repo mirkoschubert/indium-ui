@@ -12,69 +12,69 @@
    * ======================================== */
 
   /* Colors - Grays (Neutral palette) */
-  --color-gray-50: hsl(0 0% 98%);
-  --color-gray-100: hsl(0 0% 96.1%);
-  --color-gray-200: hsl(0 0% 89.8%);
-  --color-gray-300: hsl(0 0% 83.1%);
-  --color-gray-400: hsl(0 0% 63.9%);
-  --color-gray-500: hsl(0 0% 45.1%);
-  --color-gray-600: hsl(0 0% 32.2%);
-  --color-gray-700: hsl(0 0% 25.1%);
-  --color-gray-800: hsl(0 0% 14.9%);
-  --color-gray-900: hsl(0 0% 9%);
-  --color-gray-950: hsl(0 0% 3.9%);
+  --color-gray-50: 0 0% 98%;
+  --color-gray-100: 0 0% 96.1%;
+  --color-gray-200: 0 0% 89.8%;
+  --color-gray-300: 0 0% 83.1%;
+  --color-gray-400: 0 0% 63.9%;
+  --color-gray-500: 0 0% 45.1%;
+  --color-gray-600: 0 0% 32.2%;
+  --color-gray-700: 0 0% 25.1%;
+  --color-gray-800: 0 0% 14.9%;
+  --color-gray-900: 0 0% 9%;
+  --color-gray-950: 0 0% 3.9%;
 
   /* Colors - Brand Primary (Blue) */
-  --color-blue-50: hsl(214 100% 97%);
-  --color-blue-100: hsl(214 95% 93%);
-  --color-blue-200: hsl(213 97% 87%);
-  --color-blue-300: hsl(212 96% 78%);
-  --color-blue-400: hsl(213 94% 68%);
-  --color-blue-500: hsl(217 91% 60%);
-  --color-blue-600: hsl(221 83% 53%);
-  --color-blue-700: hsl(224 76% 48%);
-  --color-blue-800: hsl(226 71% 40%);
-  --color-blue-900: hsl(224 64% 33%);
-  --color-blue-950: hsl(226 57% 21%);
+  --color-blue-50: 214 100% 97%;
+  --color-blue-100: 214 95% 93%;
+  --color-blue-200: 213 97% 87%;
+  --color-blue-300: 212 96% 78%;
+  --color-blue-400: 213 94% 68%;
+  --color-blue-500: 217 91% 60%;
+  --color-blue-600: 221 83% 53%;
+  --color-blue-700: 224 76% 48%;
+  --color-blue-800: 226 71% 40%;
+  --color-blue-900: 224 64% 33%;
+  --color-blue-950: 226 57% 21%;
 
   /* Colors - Success (Green) */
-  --color-green-50: hsl(138 76% 97%);
-  --color-green-100: hsl(141 84% 93%);
-  --color-green-200: hsl(141 79% 85%);
-  --color-green-300: hsl(142 77% 73%);
-  --color-green-400: hsl(142 69% 58%);
-  --color-green-500: hsl(142 71% 45%);
-  --color-green-600: hsl(142 76% 36%);
-  --color-green-700: hsl(142 72% 29%);
-  --color-green-800: hsl(143 64% 24%);
-  --color-green-900: hsl(144 61% 20%);
-  --color-green-950: hsl(145 80% 11%);
+  --color-green-50: 138 76% 97%;
+  --color-green-100: 141 84% 93%;
+  --color-green-200: 141 79% 85%;
+  --color-green-300: 142 77% 73%;
+  --color-green-400: 142 69% 58%;
+  --color-green-500: 142 71% 45%;
+  --color-green-600: 142 76% 36%;
+  --color-green-700: 142 72% 29%;
+  --color-green-800: 143 64% 24%;
+  --color-green-900: 144 61% 20%;
+  --color-green-950: 145 80% 11%;
 
   /* Colors - Warning (Yellow) */
-  --color-yellow-50: hsl(55 92% 95%);
-  --color-yellow-100: hsl(55 97% 88%);
-  --color-yellow-200: hsl(53 98% 77%);
-  --color-yellow-300: hsl(50 98% 64%);
-  --color-yellow-400: hsl(48 96% 53%);
-  --color-yellow-500: hsl(45 93% 47%);
-  --color-yellow-600: hsl(41 96% 40%);
-  --color-yellow-700: hsl(35 92% 33%);
-  --color-yellow-800: hsl(32 81% 29%);
-  --color-yellow-900: hsl(28 73% 26%);
-  --color-yellow-950: hsl(26 83% 14%);
+  --color-yellow-50: 55 92% 95%;
+  --color-yellow-100: 55 97% 88%;
+  --color-yellow-200: 53 98% 77%;
+  --color-yellow-300: 50 98% 64%;
+  --color-yellow-400: 48 96% 53%;
+  --color-yellow-500: 45 93% 47%;
+  --color-yellow-600: 41 96% 40%;
+  --color-yellow-700: 35 92% 33%;
+  --color-yellow-800: 32 81% 29%;
+  --color-yellow-900: 28 73% 26%;
+  --color-yellow-950: 26 83% 14%;
 
   /* Colors - Danger (Red) */
-  --color-red-50: hsl(0 86% 97%);
-  --color-red-100: hsl(0 93% 94%);
-  --color-red-200: hsl(0 96% 89%);
-  --color-red-300: hsl(0 94% 82%);
-  --color-red-400: hsl(0 91% 71%);
-  --color-red-500: hsl(0 84% 60%);
-  --color-red-600: hsl(0 72% 51%);
-  --color-red-700: hsl(0 74% 42%);
-  --color-red-800: hsl(0 70% 35%);
-  --color-red-900: hsl(0 63% 31%);
-  --color-red-950: hsl(0 75% 16%);
+  --color-red-50: 0 86% 97%;
+  --color-red-100: 0 93% 94%;
+  --color-red-200: 0 96% 89%;
+  --color-red-300: 0 94% 82%;
+  --color-red-400: 0 91% 71%;
+  --color-red-500: 0 84% 60%;
+  --color-red-600: 0 72% 51%;
+  --color-red-700: 0 74% 42%;
+  --color-red-800: 0 70% 35%;
+  --color-red-900: 0 63% 31%;
+  --color-red-950: 0 75% 16%;
 
   /* Spacing (4px base scale) */
   --space-0: 0;
@@ -152,57 +152,63 @@
   --transition-base: 200ms ease-in-out;
   --transition-slow: 300ms ease-in-out;
 
-  /* ========================================
-   * SEMANTIC TOKENS (Light Mode)
-   * ======================================== */
+}
 
+/* ========================================
+ * SEMANTIC TOKENS - DEFAULT VALUES (Light Mode)
+ *
+ * Wrapped in :where() for zero specificity, allowing easy
+ * user overrides with simple :root selector.
+ * Pattern inspired by Open Props.
+ * ======================================== */
+
+:where(:root) {
   /* Text Colors */
-  --color-text-primary: var(--color-gray-900);
-  --color-text-secondary: var(--color-gray-600);
-  --color-text-tertiary: var(--color-gray-500);
-  --color-text-disabled: var(--color-gray-400);
-  --color-text-inverse: var(--color-gray-50);
+  --color-text-primary: hsl(var(--color-gray-900));
+  --color-text-secondary: hsl(var(--color-gray-600));
+  --color-text-tertiary: hsl(var(--color-gray-500));
+  --color-text-disabled: hsl(var(--color-gray-400));
+  --color-text-inverse: hsl(var(--color-gray-50));
 
   /* Background Colors */
   --color-bg-page: hsl(0 0% 100%);
-  --color-bg-surface: var(--color-gray-50);
+  --color-bg-surface: hsl(var(--color-gray-50));
   --color-bg-elevated: hsl(0 0% 100%);
   --color-bg-overlay: hsl(0 0% 0% / 0.5);
 
   /* Border Colors */
-  --color-border: var(--color-gray-200);
-  --color-border-hover: var(--color-gray-300);
-  --color-border-focus: var(--color-blue-500);
+  --color-border: hsl(var(--color-gray-200));
+  --color-border-hover: hsl(var(--color-gray-300));
+  --color-border-focus: hsl(var(--color-blue-500));
 
   /* Action Colors - Primary */
-  --color-action-primary: var(--color-blue-700);
-  --color-action-primary-hover: var(--color-blue-800);
-  --color-action-primary-active: var(--color-blue-900);
-  --color-action-primary-disabled: var(--color-gray-200);
+  --color-action-primary: hsl(var(--color-blue-700));
+  --color-action-primary-hover: hsl(var(--color-blue-800));
+  --color-action-primary-active: hsl(var(--color-blue-900));
+  --color-action-primary-disabled: hsl(var(--color-gray-200));
 
   /* Action Colors - Secondary */
-  --color-action-secondary: var(--color-gray-700);
-  --color-action-secondary-hover: var(--color-gray-800);
-  --color-action-secondary-active: var(--color-gray-900);
+  --color-action-secondary: hsl(var(--color-gray-700));
+  --color-action-secondary-hover: hsl(var(--color-gray-800));
+  --color-action-secondary-active: hsl(var(--color-gray-900));
 
   /* Feedback Colors */
-  --color-success: var(--color-green-700);
-  --color-success-bg: var(--color-green-50);
-  --color-success-border: var(--color-green-200);
+  --color-success: hsl(var(--color-green-700));
+  --color-success-bg: hsl(var(--color-green-50));
+  --color-success-border: hsl(var(--color-green-200));
 
-  --color-warning: var(--color-yellow-700);
-  --color-warning-bg: var(--color-yellow-50);
-  --color-warning-border: var(--color-yellow-200);
+  --color-warning: hsl(var(--color-yellow-700));
+  --color-warning-bg: hsl(var(--color-yellow-50));
+  --color-warning-border: hsl(var(--color-yellow-200));
 
-  --color-danger: var(--color-red-700);
-  --color-danger-bg: var(--color-red-50);
-  --color-danger-border: var(--color-red-200);
+  --color-danger: hsl(var(--color-red-700));
+  --color-danger-bg: hsl(var(--color-red-50));
+  --color-danger-border: hsl(var(--color-red-200));
 
-  --color-info: var(--color-blue-600);
-  --color-info-bg: var(--color-blue-50);
-  --color-info-border: var(--color-blue-200);
+  --color-info: hsl(var(--color-blue-600));
+  --color-info-bg: hsl(var(--color-blue-50));
+  --color-info-border: hsl(var(--color-blue-200));
 
   /* Focus Ring */
-  --focus-ring: 0 0 0 3px var(--color-blue-100);
-  --focus-ring-offset: 2px;
+  --focus-ring: 0 0 0 3px hsl(var(--color-blue-100));
 }
