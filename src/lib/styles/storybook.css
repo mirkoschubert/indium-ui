@@ -1,0 +1,73 @@
+/* Storybook Docs Theme */
+.sbdocs {
+  background-color: var(--color-bg-page) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.sbdocs-content {
+  background-color: var(--color-bg-page) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.sb-bar {
+  background-color: var(--color-bg-elevated) !important;
+  border-color: var(--color-border) !important;
+}
+
+.sb-bar button,
+.sb-bar a {
+  color: var(--color-text-tertiary) !important;
+}
+
+.sbdocs-preview {
+  background-color: var(--color-bg-surface) !important;
+  border-color: var(--color-border) !important;
+}
+
+.sbdocs-preview .docblock-code-toggle {
+  background-color: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary)
+}
+
+/* Ensure docs descriptions remain readable */
+.sbdocs p,
+.sbdocs h1,
+.sbdocs h2,
+.sbdocs h3,
+.sbdocs h4,
+.sbdocs h5,
+.sbdocs h6 {
+  color: var(--color-text-primary) !important;
+}
+
+/* Table styling for docs */
+.sbdocs table {
+  background-color: var(--color-bg-surface) !important;
+  color: var(--color-text-secondary) !important;
+}
+
+.sbdocs table thead {
+  background-color: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.sbdocs table thead th {
+  color: var(--color-text-secondary) !important;
+}
+
+.sbdocs table td {
+  background-color: transparent !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.sbdocs table td svg {
+  stroke: var(--color-text-tertiary) !important;
+}
+
+.sbdocs table td select,
+.sbdocs table td button {
+  background-color: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border-color: var(--color-border) !important;
+}

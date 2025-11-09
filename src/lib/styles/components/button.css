@@ -27,26 +27,32 @@
   -ms-user-select: none;
 }
 
-/* Sizes */
+/* Sizes (aligned with shadcn-svelte) */
 .button-sm {
-  padding: var(--space-2) var(--space-3);
+  padding: 0 var(--space-3);
   font-size: var(--text-sm);
-  border-radius: var(--radius-base);
-  min-height: 32px;
+  border-radius: var(--radius-md);
+  height: 2rem; /* 32px - h-8 */
 }
 
 .button-md {
-  padding: var(--space-3) var(--space-4);
-  font-size: var(--text-base);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
   border-radius: var(--radius-md);
-  min-height: 40px;
+  height: 2.25rem; /* 36px - h-9 */
 }
 
 .button-lg {
-  padding: var(--space-4) var(--space-6);
-  font-size: var(--text-lg);
+  padding: 0 var(--space-6);
+  font-size: var(--text-sm);
   border-radius: var(--radius-md);
-  min-height: 48px;
+  height: 2.5rem; /* 40px - h-10 */
+}
+
+/* Focus styles (default for all buttons) */
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 /* Variant: Primary */
@@ -86,18 +92,27 @@
 /* Variant: Outline */
 .button-outline {
   background-color: transparent;
-  color: var(--color-action-primary);
+  color: var(--color-text-primary);
   border-color: var(--color-border);
 }
 
 .button-outline:hover:not(:disabled) {
-  background-color: var(--color-bg-surface);
+  background-color: var(--color-action-primary);
+  color: var(--color-text-inverse);
   border-color: var(--color-action-primary);
 }
 
 .button-outline:active:not(:disabled) {
-  background-color: var(--color-bg-surface);
+  background-color: var(--color-action-primary-hover);
+  color: var(--color-text-inverse);
   border-color: var(--color-action-primary-hover);
+}
+
+.button-outline:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--color-bg-page),
+    0 0 0 4px var(--color-action-primary);
 }
 
 /* Variant: Ghost */
@@ -135,7 +150,6 @@
 /* Disabled state */
 .button:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
 }
 
 .button-primary:disabled,
@@ -185,12 +199,6 @@
 
 .button-icon-only.button-lg {
   padding: var(--space-4);
-}
-
-/* Focus styles (already handled by reset.css :focus-visible) */
-.button:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
 }
 
 /* Reduced motion */

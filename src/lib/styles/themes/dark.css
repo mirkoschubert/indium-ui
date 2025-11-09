@@ -5,21 +5,75 @@
  * Applied when data-theme="dark" OR when prefers-color-scheme: dark (and no explicit theme set).
  */
 
-[data-theme='dark'],
+/* Explicit dark theme */
+[data-theme='dark'] {
+  /* Text Colors */
+  --color-text-primary: var(--color-gray-50);
+  --color-text-secondary: var(--color-gray-300);
+  --color-text-tertiary: var(--color-gray-400);
+  --color-text-disabled: var(--color-gray-500);
+  --color-text-inverse: var(--color-gray-900);
+
+  /* Background Colors */
+  --color-bg-page: var(--color-gray-950);
+  --color-bg-surface: var(--color-gray-900);
+  --color-bg-elevated: var(--color-gray-800);
+  --color-bg-overlay: hsl(0 0% 0% / 0.7);
+
+  /* Border Colors */
+  --color-border: var(--color-gray-700);
+  --color-border-hover: var(--color-gray-600);
+  --color-border-focus: var(--color-blue-400);
+
+  /* Action Colors - Primary */
+  --color-action-primary: var(--color-blue-700);
+  --color-action-primary-hover: var(--color-blue-800);
+  --color-action-primary-active: var(--color-blue-900);
+  --color-action-primary-disabled: var(--color-gray-700);
+
+  /* Action Colors - Secondary */
+  --color-action-secondary: var(--color-gray-600);
+  --color-action-secondary-hover: var(--color-gray-700);
+  --color-action-secondary-active: var(--color-gray-800);
+
+  /* Feedback Colors */
+  --color-success: var(--color-green-600);
+  --color-success-bg: hsl(142 76% 36% / 0.1);
+  --color-success-border: var(--color-green-800);
+
+  --color-warning: var(--color-yellow-600);
+  --color-warning-bg: hsl(41 96% 40% / 0.1);
+  --color-warning-border: var(--color-yellow-800);
+
+  --color-danger: var(--color-red-600);
+  --color-danger-bg: hsl(0 72% 51% / 0.1);
+  --color-danger-border: var(--color-red-800);
+
+  --color-info: var(--color-blue-400);
+  --color-info-bg: hsl(213 94% 68% / 0.1);
+  --color-info-border: var(--color-blue-800);
+
+  /* Focus Ring */
+  --focus-ring: 0 0 0 3px hsl(213 94% 68% / 0.3);
+
+  color-scheme: dark;
+}
+
+/* Auto dark theme (system preference) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     /* Text Colors */
     --color-text-primary: var(--color-gray-50);
     --color-text-secondary: var(--color-gray-300);
     --color-text-tertiary: var(--color-gray-400);
-    --color-text-disabled: var(--color-gray-600);
+    --color-text-disabled: var(--color-gray-500);
     --color-text-inverse: var(--color-gray-900);
 
     /* Background Colors */
     --color-bg-page: var(--color-gray-950);
     --color-bg-surface: var(--color-gray-900);
     --color-bg-elevated: var(--color-gray-800);
-    --color-bg-overlay: rgba(0, 0, 0, 0.7);
+    --color-bg-overlay: hsl(0 0% 0% / 0.7);
 
     /* Border Colors */
     --color-border: var(--color-gray-700);
@@ -27,38 +81,34 @@
     --color-border-focus: var(--color-blue-400);
 
     /* Action Colors - Primary */
-    --color-action-primary: var(--color-blue-500);
-    --color-action-primary-hover: var(--color-blue-400);
-    --color-action-primary-active: var(--color-blue-300);
+    --color-action-primary: var(--color-blue-700);
+    --color-action-primary-hover: var(--color-blue-800);
+    --color-action-primary-active: var(--color-blue-900);
     --color-action-primary-disabled: var(--color-gray-700);
 
     /* Action Colors - Secondary */
-    --color-action-secondary: var(--color-gray-400);
-    --color-action-secondary-hover: var(--color-gray-300);
-    --color-action-secondary-active: var(--color-gray-200);
+    --color-action-secondary: var(--color-gray-600);
+    --color-action-secondary-hover: var(--color-gray-700);
+    --color-action-secondary-active: var(--color-gray-800);
 
     /* Feedback Colors */
-    --color-success: var(--color-green-400);
-    --color-success-bg: rgba(34, 197, 94, 0.1);
+    --color-success: var(--color-green-600);
+    --color-success-bg: hsl(142 76% 36% / 0.1);
     --color-success-border: var(--color-green-800);
 
-    --color-warning: var(--color-yellow-400);
-    --color-warning-bg: rgba(234, 179, 8, 0.1);
+    --color-warning: var(--color-yellow-600);
+    --color-warning-bg: hsl(41 96% 40% / 0.1);
     --color-warning-border: var(--color-yellow-800);
 
-    --color-danger: var(--color-red-400);
-    --color-danger-bg: rgba(239, 68, 68, 0.1);
+    --color-danger: var(--color-red-600);
+    --color-danger-bg: hsl(0 72% 51% / 0.1);
     --color-danger-border: var(--color-red-800);
 
     --color-info: var(--color-blue-400);
-    --color-info-bg: rgba(59, 130, 246, 0.1);
+    --color-info-bg: hsl(213 94% 68% / 0.1);
     --color-info-border: var(--color-blue-800);
 
     /* Focus Ring */
-    --focus-ring: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    --focus-ring: 0 0 0 3px hsl(213 94% 68% / 0.3);
   }
-}
-
-[data-theme='dark'] {
-  color-scheme: dark;
 }

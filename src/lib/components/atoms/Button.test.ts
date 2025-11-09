@@ -6,105 +6,134 @@
 
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/svelte';
-import ButtonTest from './ButtonTest.test.svelte';
+import { createRawSnippet } from 'svelte';
+import Button from './Button.svelte';
 
 describe('Button', () => {
   it('renders with default props', () => {
-    const { container } = render(ButtonTest, {
-      props: {
-        text: 'Click me'
-      }
-    });
+    const children = createRawSnippet(() => ({
+      render: () => `<span>Click me</span>`,
+    }));
 
-    const button = container.querySelector('button');
+    const { getByRole } = render(Button, { props: { children } });
+
+    const button = getByRole('button');
     expect(button).toBeTruthy();
-    expect(button?.textContent?.trim()).toBe('Click me');
+    expect(button.textContent?.trim()).toBe('Click me');
   });
 
   it('applies variant classes correctly', () => {
-    const { container } = render(ButtonTest, {
+    const children = createRawSnippet(() => ({
+      render: () => `<span>Button</span>`,
+    }));
+
+    const { getByRole } = render(Button, {
       props: {
         variant: 'secondary',
-        text: 'Button'
+        children
       }
     });
 
-    const button = container.querySelector('button');
-    expect(button?.classList.contains('button-secondary')).toBe(true);
+    const button = getByRole('button');
+    expect(button.classList.contains('button-secondary')).toBe(true);
   });
 
   it('applies size classes correctly', () => {
-    const { container } = render(ButtonTest, {
+    const children = createRawSnippet(() => ({
+      render: () => `<span>Button</span>`,
+    }));
+
+    const { getByRole } = render(Button, {
       props: {
         size: 'lg',
-        text: 'Button'
+        children
       }
     });
 
-    const button = container.querySelector('button');
-    expect(button?.classList.contains('button-lg')).toBe(true);
+    const button = getByRole('button');
+    expect(button.classList.contains('button-lg')).toBe(true);
   });
 
   it('disables button when disabled prop is true', () => {
-    const { container } = render(ButtonTest, {
+    const children = createRawSnippet(() => ({
+      render: () => `<span>Button</span>`,
+    }));
+
+    const { getByRole } = render(Button, {
       props: {
         disabled: true,
-        text: 'Button'
+        children
       }
     });
 
-    const button = container.querySelector('button');
-    expect(button?.disabled).toBe(true);
+    const button = getByRole('button') as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
   });
 
   it('shows loading spinner when loading', () => {
-    const { container } = render(ButtonTest, {
+    const children = createRawSnippet(() => ({
+      render: () => `<span>Button</span>`,
+    }));
+
+    const { getByRole, container } = render(Button, {
       props: {
         loading: true,
-        text: 'Button'
+        children
       }
     });
 
-    const button = container.querySelector('button');
+    const button = getByRole('button');
     const spinner = container.querySelector('.button-spinner');
 
-    expect(button?.getAttribute('aria-busy')).toBe('true');
+    expect(button.getAttribute('aria-busy')).toBe('true');
     expect(spinner).toBeTruthy();
   });
 
   it('applies fullWidth class when fullWidth is true', () => {
-    const { container } = render(ButtonTest, {
+    const children = createRawSnippet(() => ({
+      render: () => `<span>Button</span>`,
+    }));
+
+    const { getByRole } = render(Button, {
       props: {
         fullWidth: true,
-        text: 'Button'
+        children
       }
     });
 
-    const button = container.querySelector('button');
-    expect(button?.classList.contains('button-full')).toBe(true);
+    const button = getByRole('button');
+    expect(button.classList.contains('button-full')).toBe(true);
   });
 
   it('applies custom className', () => {
-    const { container } = render(ButtonTest, {
+    const children = createRawSnippet(() => ({
+      render: () => `<span>Button</span>`,
+    }));
+
+    const { getByRole } = render(Button, {
       props: {
         class: 'custom-class',
-        text: 'Button'
+        children
       }
     });
 
-    const button = container.querySelector('button');
-    expect(button?.classList.contains('custom-class')).toBe(true);
+    const button = getByRole('button');
+    expect(button.classList.contains('custom-class')).toBe(true);
   });
 
   it('sets button type correctly', () => {
-    const { container } = render(ButtonTest, {
+    const children = createRawSnippet(() => ({
+      render: () => `<span>Button</span>`,
+    }));
+
+    const { getByRole } = render(Button, {
       props: {
         type: 'submit',
-        text: 'Button'
+        children
       }
     });
 
-    const button = container.querySelector('button');
-    expect(button?.type).toBe('submit');
+    const button = getByRole('button') as HTMLButtonElement;
+    expect(button.type).toBe('submit');
   });
 });
