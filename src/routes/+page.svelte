@@ -1,3 +1,15 @@
-<h1>Welcome to your library project</h1>
-<p>Create your package using @sveltejs/package and preview/showcase your work with SvelteKit</p>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import Button from '$lib/components/atoms/Button.svelte';
+	import '$lib/styles/index.css';
+</script>
+
+<h1>Indium UI - Library Project</h1>
+<p>Testing CSS generation with @indium-theme directive</p>
+
+<div style="margin: 2rem 0;">
+	<Button>Default Button</Button>
+	<Button variant="secondary">Secondary</Button>
+	<Button variant="outline">Outline</Button>
+</div>
+
+<p>Check DevTools for CSS variables!</p>

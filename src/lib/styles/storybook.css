@@ -1,17 +1,17 @@
 /* Storybook Docs Theme */
 .sbdocs {
-  background-color: var(--color-bg-page) !important;
+  background-color: var(--color-background-page) !important;
   color: var(--color-text-primary) !important;
 }
 
 .sbdocs-content {
-  background-color: var(--color-bg-page) !important;
+  background-color: var(--color-background-page) !important;
   color: var(--color-text-primary) !important;
 }
 
 .sb-bar {
-  background-color: var(--color-bg-elevated) !important;
-  border-color: var(--color-border) !important;
+  background-color: var(--color-background-elevated) !important;
+  border-color: var(--color-border-normal) !important;
 }
 
 .sb-bar button,
@@ -20,12 +20,12 @@
 }
 
 .sbdocs-preview {
-  background-color: var(--color-bg-surface) !important;
-  border-color: var(--color-border) !important;
+  background-color: var(--color-background-surface) !important;
+  border-color: var(--color-border-normal) !important;
 }
 
 .sbdocs-preview .docblock-code-toggle {
-  background-color: var(--color-bg-elevated) !important;
+  background-color: var(--color-background-elevated) !important;
   color: var(--color-text-primary)
 }
 
@@ -42,13 +42,13 @@
 
 /* Table styling for docs */
 .sbdocs table {
-  background-color: var(--color-bg-surface) !important;
+  background-color: var(--color-background-surface) !important;
   color: var(--color-text-secondary) !important;
 }
 
 .sbdocs table thead {
-  background-color: var(--color-bg-elevated) !important;
-  border: 1px solid var(--color-border) !important;
+  background-color: var(--color-background-elevated) !important;
+  border: 1px solid var(--color-border-normal) !important;
 }
 
 .sbdocs table thead th {
@@ -57,7 +57,7 @@
 
 .sbdocs table td {
   background-color: transparent !important;
-  border-color: var(--color-border) !important;
+  border-color: var(--color-border-normal) !important;
   color: var(--color-text-primary) !important;
 }
 
@@ -67,7 +67,7 @@
 
 .sbdocs table td select,
 .sbdocs table td button {
-  background-color: var(--color-bg-elevated) !important;
+  background-color: var(--color-background-elevated) !important;
   color: var(--color-text-primary) !important;
-  border-color: var(--color-border) !important;
+  border-color: var(--color-border-normal) !important;
 }

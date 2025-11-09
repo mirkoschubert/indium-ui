@@ -1,6 +1,6 @@
 // src/lib/postcss-plugin.ts
 
-import type { Plugin, AtRule, Root } from 'postcss';
+import postcss, { type Plugin, type AtRule, type Root } from 'postcss';
 import { loadConfigSync } from './config/config-loader.js';
 import {
   generatePrimitiveVariables,
@@ -187,11 +187,8 @@ export default function indiumThemePlugin(options: PluginOptions = {}): Plugin {
         // Generate CSS from config
         const generatedCSS = generateThemeCSS(config);
 
-        // Parse generated CSS and insert into AST
-        const root = result.root as Root;
-        const parsedCSS = result.processor.process(generatedCSS, {
-          from: undefined,
-        }).root;
+        // Parse generated CSS using postcss.parse (synchronous)
+        const parsedCSS = postcss.parse(generatedCSS);
 
         // Replace @indium-theme with generated nodes
         atRule.replaceWith(parsedCSS.nodes);
