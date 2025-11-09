@@ -8,15 +8,11 @@
  * import 'indium-ui/styles';
  */
 
-/* Design Tokens */
-@import './tokens.css';
+/* Generate Design Tokens & Themes from Configuration */
+@indium-theme;
 
 /* CSS Reset & Base */
 @import './reset.css';
-
-/* Themes */
-@import './themes/light.css';
-@import './themes/dark.css';
 
 /* Component Styles */
 @import './components/button.css';
