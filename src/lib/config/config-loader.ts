@@ -73,9 +73,19 @@ export function findConfigFile(cwd: string = process.cwd()): string | null {
  */
 async function importConfig(configPath: string): Promise<Partial<IndiumConfig>> {
   try {
-    // Use dynamic import for both .ts and .js files
-    // TypeScript files need to be handled by the build tool (Vite/esbuild)
-    const mod = await import(configPath);
+    // Use jiti for loading TypeScript config files
+    // jiti compiles TS on-the-fly and doesn't have ESM caching issues
+    const { createJiti } = await import('jiti');
+    const jiti = createJiti(import.meta.url, {
+      interopDefault: true,
+      esmResolve: true,
+    });
+
+    // Clear jiti's own cache for this file
+    delete jiti.cache[configPath];
+
+    // Load the config file (works with both .ts and .js)
+    const mod = jiti(configPath);
 
     // Handle both ESM (export default) and CJS (module.exports)
     return mod.default || mod;

@@ -1,7 +1,7 @@
 // src/lib/postcss-plugin.ts
 
 import postcss, { type Plugin, type AtRule, type Root } from 'postcss';
-import { loadConfigSync } from './config/config-loader.js';
+import { loadConfig, findConfigFile } from './config/config-loader.js';
 import {
   generatePrimitiveVariables,
   flattenSemanticTokens,
@@ -174,29 +174,46 @@ export default function indiumThemePlugin(options: PluginOptions = {}): Plugin {
   return {
     postcssPlugin: 'indium-ui/theme',
 
-    AtRule(atRule: AtRule, { result }: { result: any }) {
+    async AtRule(atRule: AtRule, { result }: { result: any }) {
       // Only process @indium-theme directives
       if (atRule.name !== 'indium-theme') {
         return;
       }
 
       try {
-        // Load config (defaults + user overrides)
-        const config = loadConfigSync(options.cwd || process.cwd());
+        const cwd = options.cwd || process.cwd();
+
+        // Find config file path for HMR dependency tracking
+        const configPath = findConfigFile(cwd);
+
+        // Load config from cache (shared with Vite plugin)
+        // This ensures config changes invalidated by the Vite plugin are reflected here
+        const { configCache } = await import('./config/config-cache.js');
+        const config = await configCache.getConfig(cwd);
+
+        // Add config file as dependency for HMR (if exists)
+        if (configPath && result.messages) {
+          result.messages.push({
+            type: 'dependency',
+            plugin: 'indium-ui/theme',
+            file: configPath,
+            parent: result.opts?.from,
+          });
+        }
 
         // Generate CSS from config
-        const generatedCSS = generateThemeCSS(config);
+        let generatedCSS = generateThemeCSS(config);
+
+        // Add timestamp comment to bust Vite CSS cache on config changes
+        // This ensures HMR picks up config changes even if the CSS structure is identical
+        const timestamp = Date.now();
+        generatedCSS = `/* Indium UI theme - updated: ${timestamp} */\n${generatedCSS}`;
 
         // Parse generated CSS using postcss.parse (synchronous)
         const parsedCSS = postcss.parse(generatedCSS);
 
         // Replace @indium-theme with generated nodes
         atRule.replaceWith(parsedCSS.nodes);
-
-        // Log success (optional, can be removed in production)
-        if (process.env.NODE_ENV !== 'test') {
-          console.log('✓ Indium UI theme generated');
-        }
       } catch (error) {
         // Log error and keep @indium-theme directive for debugging
         console.error('Error generating Indium UI theme:', error);
