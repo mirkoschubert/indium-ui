@@ -137,10 +137,12 @@ export interface Primitives {
  * ==========================================
  * SEMANTIC TOKENS (Layer 3 - Opinionated)
  * ==========================================
- * 
- * Theme-aware color intentions and typography roles.
- * Has light & dark variants.
- * 
+ *
+ * Separates theme-dependent (colors) from theme-independent (typography, sizing) tokens.
+ *
+ * THEME-DEPENDENT: Only colors change between light/dark modes
+ * THEME-INDEPENDENT: Typography & sizing are shared across all themes
+ *
  * Color references can be:
  * - Direct HEX: '#ffffff' or '#ffffff/0.5'
  * - Palette ref: 'gray.500' or 'blue.700'
@@ -150,7 +152,7 @@ export interface Primitives {
 export type ColorRef = string; // '#ffffff' | 'gray.500' | 'gray.500/0.5' | etc.
 
 // ==========================================
-// Semantic Colors
+// Semantic Colors (THEME-DEPENDENT)
 // ==========================================
 
 export interface SemanticTextColors {
@@ -221,7 +223,10 @@ export interface SemanticFocusRing {
   [key: string]: ColorRef | string | undefined;
 }
 
-export interface SemanticColors {
+/**
+ * Color theme for one mode (light, dark, or custom)
+ */
+export interface SemanticColorTheme {
   text?: SemanticTextColors;
   background?: SemanticBackgroundColors;
   border?: SemanticBorderColors;
@@ -232,12 +237,12 @@ export interface SemanticColors {
 }
 
 // ==========================================
-// Semantic Typography
+// Semantic Typography (THEME-INDEPENDENT)
 // ==========================================
 
 export interface SemanticDefaultTypography {
   font?: Record<string, string>; // 'family', 'size', 'weight', etc.
-  color?: ColorRef;
+  color?: ColorRef; // References semantic color token (e.g. 'text.primary')
   [key: string]: any;
 }
 
@@ -246,7 +251,7 @@ export interface SemanticHeadingTypography {
   size?: SizeValue;        // h1 base size (e.g. '2rem')
   lineHeight?: LineHeight; // Base line-height (e.g. 1.2)
   scaling?: number;        // Global multiplier for BOTH size & lineHeight
-  color?: ColorRef;
+  color?: ColorRef;        // References semantic color token (e.g. 'text.primary')
   [key: string]: any;
 }
 
@@ -257,7 +262,7 @@ export interface SemanticTypography {
 }
 
 // ==========================================
-// Semantic Sizing
+// Semantic Sizing (THEME-INDEPENDENT)
 // ==========================================
 
 export interface SemanticSizing {
@@ -266,24 +271,33 @@ export interface SemanticSizing {
 }
 
 // ==========================================
-// One Theme (Light or Dark)
-// ==========================================
-
-export interface SemanticTheme {
-  colors?: SemanticColors;
-  typography?: SemanticTypography;
-  sizing?: SemanticSizing;
-  [key: string]: any; // Erweiterbar für custom theme aspects
-}
-
-// ==========================================
 // All Semantic Tokens
 // ==========================================
 
 export interface Semantic {
-  light?: SemanticTheme;
-  dark?: SemanticTheme;
-  [key: string]: SemanticTheme | undefined; // Erweiterbar für custom themes
+  /**
+   * Theme-dependent color tokens
+   * Define different values for each theme (light, dark, custom)
+   */
+  colors?: {
+    light?: SemanticColorTheme;
+    dark?: SemanticColorTheme;
+    [key: string]: SemanticColorTheme | undefined; // Custom themes (e.g. 'high-contrast')
+  };
+
+  /**
+   * Theme-independent typography
+   * Shared across all themes (only color references are theme-aware)
+   */
+  typography?: SemanticTypography;
+
+  /**
+   * Theme-independent sizing
+   * Shared across all themes
+   */
+  sizing?: SemanticSizing;
+
+  [key: string]: any; // Erweiterbar für custom categories
 }
 
 // ==========================================
@@ -301,10 +315,14 @@ export interface IndiumConfig {
  */
 export interface IndiumConfigFull extends Required<IndiumConfig> {
   primitives: Required<Primitives>;
-  semantic: {
-    light: Required<SemanticTheme>;
-    dark: Required<SemanticTheme>;
-    [key: string]: SemanticTheme | undefined;
+  semantic: Required<Semantic> & {
+    colors: {
+      light: Required<SemanticColorTheme>;
+      dark: Required<SemanticColorTheme>;
+      [key: string]: SemanticColorTheme | undefined;
+    };
+    typography: Required<SemanticTypography>;
+    sizing: Required<SemanticSizing>;
   };
 }
 

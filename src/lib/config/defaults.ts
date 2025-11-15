@@ -234,8 +234,9 @@ export const defaultConfig: IndiumConfig = {
 	},
 
 	semantic: {
-		light: {
-			colors: {
+		// Theme-dependent colors (light & dark modes)
+		colors: {
+			light: {
 				text: {
 					primary: 'gray.900', // #111827
 					secondary: 'gray.700', // #374151
@@ -305,38 +306,7 @@ export const defaultConfig: IndiumConfig = {
 				}
 			},
 
-			typography: {
-				default: {
-					font: {
-						family: 'sans',
-						size: 'base',
-						weight: 'normal',
-						lineHeight: 'normal',
-						letterSpacing: 'normal'
-					},
-					color: 'text.primary'
-				},
-
-				heading: {
-					font: {
-						family: 'sans',
-						weight: 'bold',
-						lineHeight: 'tight',
-						letterSpacing: 'tight'
-					},
-					size: '2rem', // h1 base size (32px)
-					scaling: 1,
-					color: 'text.primary'
-				}
-			},
-
-			sizing: {
-				scaling: 1 // 1 = no scaling (default)
-			}
-		},
-
-		dark: {
-			colors: {
+			dark: {
 				text: {
 					primary: 'gray.50', // #f9fafb
 					secondary: 'gray.400', // #9ca3af
@@ -404,36 +374,38 @@ export const defaultConfig: IndiumConfig = {
 					color: 'blue.400', // #60a5fa
 					shadow: '0 0 0 3px rgba(96, 165, 250, 0.3)'
 				}
-			},
-
-			typography: {
-				default: {
-					font: {
-						family: 'sans',
-						size: 'base',
-						weight: 'normal',
-						lineHeight: 'normal',
-						letterSpacing: 'normal'
-					},
-					color: 'text.primary'
-				},
-
-				heading: {
-					font: {
-						family: 'sans',
-						size: 'base',
-						weight: 'bold',
-						lineHeight: 'tight',
-						letterSpacing: 'tight'
-					},
-					scaling: 1,
-					color: 'text.primary'
-				}
-			},
-
-			sizing: {
-				scaling: 1
 			}
+		},
+
+		// Theme-independent typography (shared across all themes)
+		typography: {
+			default: {
+				font: {
+					family: 'sans',
+					size: 'base',
+					weight: 'normal',
+					lineHeight: 'normal',
+					letterSpacing: 'normal'
+				},
+				color: 'text.primary' // References semantic color (theme-aware)
+			},
+
+			heading: {
+				font: {
+					family: 'sans',
+					weight: 'bold',
+					lineHeight: 'tight',
+					letterSpacing: 'tight'
+				},
+				size: '2rem', // h1 base size (32px)
+				scaling: 1,
+				color: 'text.primary' // References semantic color (theme-aware)
+			}
+		},
+
+		// Theme-independent sizing (shared across all themes)
+		sizing: {
+			scaling: 1 // 1 = no scaling (default)
 		}
 	}
 }

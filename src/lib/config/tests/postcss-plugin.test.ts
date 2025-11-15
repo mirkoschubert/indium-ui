@@ -256,15 +256,16 @@ describe('PostCSS Plugin - Theme Switching', () => {
     const output = await processCSS(input);
 
     // Extract color values from light and dark themes
-    // Use more specific regex to avoid matching :root:not([data-theme="dark"])
-    const lightMatch = output.match(/\[data-theme="light"\],\s*\n:root:not\(\[data-theme="dark"\]\)\s*\{([^}]+)\}/s);
+    // New structure uses :where(:root) for light theme default
+    const lightMatch = output.match(/:where\(:root\),\s*\[data-theme="light"\]\s*\{([^}]+)\}/s);
     const darkMatch = output.match(/\[data-theme="dark"\]\s*\{\s*([\s\S]*?)\n\}/);
 
     expect(lightMatch).toBeTruthy();
     expect(darkMatch).toBeTruthy();
 
-    // Light and dark should have different content
-    expect(lightMatch![1]).not.toBe(darkMatch![1]);
+    // Light and dark should have different content (at least the color-scheme)
+    expect(lightMatch![1]).toContain('color-scheme: light');
+    expect(darkMatch![1]).toContain('color-scheme: dark');
   });
 
   it('auto dark mode has same variables as explicit dark theme', async () => {
@@ -282,11 +283,12 @@ describe('PostCSS Plugin - Theme Switching', () => {
     expect(autoDark![1]).toContain('color-scheme: dark');
   });
 
-  it('supports :root:not([data-theme="dark"]) for light fallback', async () => {
+  it('supports :where(:root) for light theme default', async () => {
     const input = '@indium-theme;';
     const output = await processCSS(input);
 
-    expect(output).toContain(':root:not([data-theme="dark"])');
+    // New structure uses :where(:root) with lower specificity instead of :root:not()
+    expect(output).toContain(':where(:root)');
   });
 
   it('supports :root:not([data-theme="light"]) for dark fallback', async () => {

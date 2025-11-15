@@ -33,8 +33,7 @@ export type {
 
   // Semantic
   Semantic,
-  SemanticTheme,
-  SemanticColors,
+  SemanticColorTheme,
   SemanticTextColors,
   SemanticBackgroundColors,
   SemanticBorderColors,

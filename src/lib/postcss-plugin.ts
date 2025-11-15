@@ -69,36 +69,40 @@ function generateThemeCSS(config: IndiumConfig): string {
   // ==========================================
   // SEMANTIC LIGHT THEME
   // ==========================================
-  if (config.semantic?.light) {
-    const lightTheme = config.semantic.light;
+  if (config.semantic?.colors?.light || config.semantic?.typography || config.semantic?.sizing) {
     const lightVars: Record<string, string> = {};
 
-    // Colors
-    if (lightTheme.colors && config.primitives?.colors) {
+    // Colors (theme-dependent)
+    if (config.semantic.colors?.light && config.primitives?.colors) {
       const colorVars = flattenSemanticTokens(
-        lightTheme.colors,
+        config.semantic.colors.light,
         config.primitives.colors,
         config.primitives
       );
       Object.assign(lightVars, colorVars);
     }
 
-    // Typography - Default
-    if (lightTheme.typography?.default && config.primitives) {
+    // Typography - Default (theme-independent, but included in light theme)
+    if (config.semantic.typography?.default && config.primitives) {
       const defaultTypoVars = resolveDefaultTypography(
-        lightTheme.typography.default,
+        config.semantic.typography.default,
         config.primitives
       );
       Object.assign(lightVars, defaultTypoVars);
     }
 
-    // Typography - Heading
-    if (lightTheme.typography?.heading && config.primitives) {
+    // Typography - Heading (theme-independent, but included in light theme)
+    if (config.semantic.typography?.heading && config.primitives) {
       const headingVars = calculateHeadingScaling(
-        lightTheme.typography.heading,
+        config.semantic.typography.heading,
         config.primitives
       );
       Object.assign(lightVars, headingVars);
+    }
+
+    // Sizing (theme-independent, but included in light theme)
+    if (config.semantic.sizing?.scaling !== undefined) {
+      lightVars['--sizing-scaling'] = String(config.semantic.sizing.scaling);
     }
 
     // Generate Light Theme CSS (default + explicit)
@@ -114,36 +118,40 @@ ${generateCSSVariables(lightVars)}
   // ==========================================
   // SEMANTIC DARK THEME
   // ==========================================
-  if (config.semantic?.dark) {
-    const darkTheme = config.semantic.dark;
+  if (config.semantic?.colors?.dark || config.semantic?.typography || config.semantic?.sizing) {
     const darkVars: Record<string, string> = {};
 
-    // Colors
-    if (darkTheme.colors && config.primitives?.colors) {
+    // Colors (theme-dependent - only colors differ between light/dark)
+    if (config.semantic.colors?.dark && config.primitives?.colors) {
       const colorVars = flattenSemanticTokens(
-        darkTheme.colors,
+        config.semantic.colors.dark,
         config.primitives.colors,
         config.primitives
       );
       Object.assign(darkVars, colorVars);
     }
 
-    // Typography - Default
-    if (darkTheme.typography?.default && config.primitives) {
+    // Typography - Default (theme-independent, same as light)
+    if (config.semantic.typography?.default && config.primitives) {
       const defaultTypoVars = resolveDefaultTypography(
-        darkTheme.typography.default,
+        config.semantic.typography.default,
         config.primitives
       );
       Object.assign(darkVars, defaultTypoVars);
     }
 
-    // Typography - Heading
-    if (darkTheme.typography?.heading && config.primitives) {
+    // Typography - Heading (theme-independent, same as light)
+    if (config.semantic.typography?.heading && config.primitives) {
       const headingVars = calculateHeadingScaling(
-        darkTheme.typography.heading,
+        config.semantic.typography.heading,
         config.primitives
       );
       Object.assign(darkVars, headingVars);
+    }
+
+    // Sizing (theme-independent, same as light)
+    if (config.semantic.sizing?.scaling !== undefined) {
+      darkVars['--sizing-scaling'] = String(config.semantic.sizing.scaling);
     }
 
     // Generate Dark Theme CSS (explicit)
