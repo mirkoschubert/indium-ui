@@ -15,3 +15,18 @@ export * from './utils/a11y.js';
 
 // Config
 export * from './config/config-loader.js';
+
+// Config Types (for user type-safe configuration)
+export type {
+  IndiumConfig,
+  Primitives,
+  Semantic,
+  SemanticColorTheme,
+  SemanticTextColors,
+  SemanticBackgroundColors,
+  SemanticBorderColors,
+  SemanticActionColors,
+  SemanticFeedbackColors,
+  SemanticTypography,
+  SemanticSizing
+} from './config/types.js';

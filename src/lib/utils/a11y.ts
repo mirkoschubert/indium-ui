@@ -10,7 +10,7 @@
  * @returns A unique ID string
  */
 export function generateId(prefix = 'indium'): string {
-  return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+  return `${prefix}-${Math.random().toString(36).slice(2, 11)}`;
 }
 
 /**

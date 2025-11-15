@@ -159,8 +159,11 @@ export const defaultConfig: IndiumConfig = {
 					semibold: 600
 				},
 				lineHeight: {
+					none: 1,
+					tight: 1.25,
 					normal: 1.5,
-					tight: 1.25
+					relaxed: 1.625,
+					loose: 2
 				}
 			}
 		},

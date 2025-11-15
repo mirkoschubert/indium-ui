@@ -147,19 +147,19 @@
 
 /* Variant: Danger */
 .button-danger {
-  background-color: var(--color-feedback-error-normal);
+  background-color: var(--color-feedback-danger-color);
   color: white;
-  border-color: var(--color-feedback-error-normal);
+  border-color: var(--color-feedback-danger-color);
 }
 
 .button-danger:hover:not(:disabled) {
-  background-color: var(--color-feedback-error-hover);
-  border-color: var(--color-feedback-error-hover);
+  background-color: var(--color-feedback-danger-border);
+  border-color: var(--color-feedback-danger-border);
 }
 
 .button-danger:active:not(:disabled) {
-  background-color: var(--color-feedback-error-active);
-  border-color: var(--color-feedback-error-active);
+  background-color: var(--color-feedback-danger-text);
+  border-color: var(--color-feedback-danger-text);
 }
 
 /* Disabled state */

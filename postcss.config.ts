@@ -1,6 +1,6 @@
 // postcss.config.ts
 
-import indiumThemePlugin from './src/lib/postcss-plugin';
+import indiumThemePlugin from './src/lib/config/postcss-plugin';
 
 export default {
   plugins: [

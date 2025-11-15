@@ -1,14 +1,14 @@
-// src/lib/postcss-plugin.ts
+// src/lib/config/postcss-plugin.ts
 
 import postcss, { type Plugin, type AtRule, type Root } from 'postcss';
-import { loadConfig, findConfigFile } from './config/config-loader.js';
+import { loadConfig, findConfigFile } from './config-loader.js';
 import {
   generatePrimitiveVariables,
   flattenSemanticTokens,
   resolveDefaultTypography,
   calculateHeadingScaling,
-} from './config/render-helpers.js';
-import type { IndiumConfig } from './config/types.js';
+} from './render-helpers.js';
+import type { IndiumConfig } from './types.js';
 
 /**
  * PostCSS plugin for Indium UI theme generation
@@ -67,42 +67,53 @@ function generateThemeCSS(config: IndiumConfig): string {
   }
 
   // ==========================================
-  // SEMANTIC LIGHT THEME
+  // THEME-INDEPENDENT SEMANTIC TOKENS - :root
   // ==========================================
-  if (config.semantic?.colors?.light || config.semantic?.typography || config.semantic?.sizing) {
+  if (config.semantic?.typography || config.semantic?.sizing) {
+    const themeIndependentVars: Record<string, string> = {};
+
+    // Typography - Default (theme-independent)
+    if (config.semantic.typography?.default && config.primitives) {
+      const defaultTypoVars = resolveDefaultTypography(
+        config.semantic.typography.default,
+        config.primitives
+      );
+      Object.assign(themeIndependentVars, defaultTypoVars);
+    }
+
+    // Typography - Heading (theme-independent)
+    if (config.semantic.typography?.heading && config.primitives) {
+      const headingVars = calculateHeadingScaling(
+        config.semantic.typography.heading,
+        config.primitives
+      );
+      Object.assign(themeIndependentVars, headingVars);
+    }
+
+    // Sizing (theme-independent)
+    if (config.semantic.sizing?.scaling !== undefined) {
+      themeIndependentVars['--sizing-scaling'] = String(config.semantic.sizing.scaling);
+    }
+
+    // Generate theme-independent CSS
+    const themeIndependentCSS = `:root {\n${generateCSSVariables(themeIndependentVars)}\n}`;
+    cssBlocks.push(themeIndependentCSS);
+  }
+
+  // ==========================================
+  // SEMANTIC LIGHT THEME (Colors only)
+  // ==========================================
+  if (config.semantic?.colors?.light) {
     const lightVars: Record<string, string> = {};
 
     // Colors (theme-dependent)
-    if (config.semantic.colors?.light && config.primitives?.colors) {
+    if (config.primitives?.colors) {
       const colorVars = flattenSemanticTokens(
         config.semantic.colors.light,
         config.primitives.colors,
         config.primitives
       );
       Object.assign(lightVars, colorVars);
-    }
-
-    // Typography - Default (theme-independent, but included in light theme)
-    if (config.semantic.typography?.default && config.primitives) {
-      const defaultTypoVars = resolveDefaultTypography(
-        config.semantic.typography.default,
-        config.primitives
-      );
-      Object.assign(lightVars, defaultTypoVars);
-    }
-
-    // Typography - Heading (theme-independent, but included in light theme)
-    if (config.semantic.typography?.heading && config.primitives) {
-      const headingVars = calculateHeadingScaling(
-        config.semantic.typography.heading,
-        config.primitives
-      );
-      Object.assign(lightVars, headingVars);
-    }
-
-    // Sizing (theme-independent, but included in light theme)
-    if (config.semantic.sizing?.scaling !== undefined) {
-      lightVars['--sizing-scaling'] = String(config.semantic.sizing.scaling);
     }
 
     // Generate Light Theme CSS (default + explicit)
@@ -116,42 +127,19 @@ ${generateCSSVariables(lightVars)}
   }
 
   // ==========================================
-  // SEMANTIC DARK THEME
+  // SEMANTIC DARK THEME (Colors only)
   // ==========================================
-  if (config.semantic?.colors?.dark || config.semantic?.typography || config.semantic?.sizing) {
+  if (config.semantic?.colors?.dark) {
     const darkVars: Record<string, string> = {};
 
     // Colors (theme-dependent - only colors differ between light/dark)
-    if (config.semantic.colors?.dark && config.primitives?.colors) {
+    if (config.primitives?.colors) {
       const colorVars = flattenSemanticTokens(
         config.semantic.colors.dark,
         config.primitives.colors,
         config.primitives
       );
       Object.assign(darkVars, colorVars);
-    }
-
-    // Typography - Default (theme-independent, same as light)
-    if (config.semantic.typography?.default && config.primitives) {
-      const defaultTypoVars = resolveDefaultTypography(
-        config.semantic.typography.default,
-        config.primitives
-      );
-      Object.assign(darkVars, defaultTypoVars);
-    }
-
-    // Typography - Heading (theme-independent, same as light)
-    if (config.semantic.typography?.heading && config.primitives) {
-      const headingVars = calculateHeadingScaling(
-        config.semantic.typography.heading,
-        config.primitives
-      );
-      Object.assign(darkVars, headingVars);
-    }
-
-    // Sizing (theme-independent, same as light)
-    if (config.semantic.sizing?.scaling !== undefined) {
-      darkVars['--sizing-scaling'] = String(config.semantic.sizing.scaling);
     }
 
     // Generate Dark Theme CSS (explicit)

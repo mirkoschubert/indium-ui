@@ -141,24 +141,62 @@ pnpm check
 pnpm lint
 ```
 
+## Releasing
+
+This project uses a simple, CHANGELOG-driven release process:
+
+1. **Update CHANGELOG.md** with the new version and changes:
+   ```markdown
+   ## [0.2.0] - 2025-01-16
+
+   ### Added
+   - New Input component
+
+   ### Fixed
+   - Button focus styles
+   ```
+
+2. **Run the release command**:
+   ```bash
+   pnpm release
+   ```
+
+This will automatically:
+- Extract version and release notes from CHANGELOG.md
+- Update package.json version
+- Create git commit and tag
+- Push to GitHub
+- Create GitHub Release with changelog notes
+- Publish to npm
+
+**Prerequisites:**
+- [GitHub CLI (gh)](https://cli.github.com/) must be installed
+- You must be logged in to npm (`npm login`)
+- No uncommitted changes in git
+
 ## Project Structure
 
 ```
 src/
 ├── lib/
 │   ├── components/
-│   │   ├── atoms/      # Basic components (Button, Input, etc.)
-│   │   ├── molecules/  # Composite components (Card, Alert, etc.)
-│   │   └── organisms/  # Complex components (Modal, Header, etc.)
+│   │   ├── atoms/           # Basic components (Button, Input, etc.)
+│   │   ├── molecules/       # Composite components (Card, Alert, etc.)
+│   │   └── organisms/       # Complex components (Modal, Header, etc.)
+│   ├── config/
+│   │   ├── types.ts         # Type definitions
+│   │   ├── defaults.ts      # Default configuration
+│   │   ├── config-loader.ts # Configuration loading
+│   │   ├── render-helpers.ts # CSS generation helpers
+│   │   └── postcss-plugin.ts # PostCSS theme plugin
 │   ├── styles/
-│   │   ├── tokens.css      # Design tokens
-│   │   ├── reset.css       # CSS reset
-│   │   ├── themes/         # Light & dark themes
-│   │   └── components/     # Component styles
+│   │   ├── reset.css        # CSS reset
+│   │   ├── components/      # Component styles
+│   │   └── index.css        # Main bundle
 │   └── utils/
-│       ├── theme.ts        # Theme utilities
-│       ├── a11y.ts         # Accessibility helpers
-│       └── types.ts        # TypeScript types
+│       ├── theme.ts         # Theme utilities
+│       ├── a11y.ts          # Accessibility helpers
+│       └── types.ts         # Shared TypeScript types
 ```
 
 ## Documentation
@@ -167,14 +205,19 @@ src/
 - 📖 [Component Specifications](./module-1-components.md)
 - 🎨 [CSS Framework Philosophy](./module-2-css-framework.md)
 - 🤖 [AI Development Guide](./CLAUDE.md)
+- 📋 [Changelog](./CHANGELOG.md)
 
 ## Contributing
 
 This project is currently in early development. Contributions will be welcome once we reach v1.0.
 
+For more information, see our [Contributing Guide](./CONTRIBUTING.md).
+
 ## License
 
 MIT © [Mirko Schubert](https://github.com/mirkoschubert)
+
+See [LICENSE](./LICENSE) for details.
 
 ## Acknowledgments
 

@@ -6,7 +6,7 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 import postcss from 'postcss';
-import indiumThemePlugin from '../../postcss-plugin.js';
+import indiumThemePlugin from './postcss-plugin.js';
 
 // ==========================================
 // TEST HELPERS

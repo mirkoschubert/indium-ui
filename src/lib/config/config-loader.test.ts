@@ -5,8 +5,8 @@
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { deepMerge, defineConfig, validateConfig } from '../config-loader.js';
-import type { IndiumConfig } from '../types.js';
+import { deepMerge, defineConfig, validateConfig } from './config-loader.js';
+import type { IndiumConfig } from './types.js';
 
 // ==========================================
 // DEEP MERGE TESTS

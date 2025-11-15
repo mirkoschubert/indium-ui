@@ -8,11 +8,12 @@
  * import 'indium-ui/styles';
  */
 
-/* CSS Reset & Base (must be imported before @indium-theme) */
+/* CSS Reset & Base (imported first to satisfy PostCSS) */
 @import './reset.css';
 
-/* Component Styles (must be imported before @indium-theme) */
+/* Component Styles */
 @import './components/button.css';
 
 /* Generate Design Tokens & Themes from Configuration */
+/* Note: This generates :root rules which cascade down to components above */
 @indium-theme;
