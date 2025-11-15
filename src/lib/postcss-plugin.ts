@@ -101,9 +101,10 @@ function generateThemeCSS(config: IndiumConfig): string {
       Object.assign(lightVars, headingVars);
     }
 
-    // Generate Light Theme CSS
-    const lightCSS = `[data-theme="light"],
-:root:not([data-theme="dark"]) {
+    // Generate Light Theme CSS (default + explicit)
+    // We use :where() to lower specificity so dark mode media query can override
+    const lightCSS = `:where(:root),
+[data-theme="light"] {
   color-scheme: light;
 ${generateCSSVariables(lightVars)}
 }`;
@@ -186,12 +187,8 @@ export default function indiumThemePlugin(options: PluginOptions = {}): Plugin {
         // Find config file path for HMR dependency tracking
         const configPath = findConfigFile(cwd);
 
-        // Load config from cache (shared with Vite plugin)
-        // This ensures config changes invalidated by the Vite plugin are reflected here
-        const { configCache } = await import('./config/config-cache.js');
-        const config = await configCache.getConfig(cwd);
-
-        // Add config file as dependency for HMR (if exists)
+        // ⭐ Register config file as dependency for Vite's HMR (Tailwind 4 approach)
+        // This makes Vite watch the config file and trigger transform on changes
         if (configPath && result.messages) {
           result.messages.push({
             type: 'dependency',
@@ -201,13 +198,12 @@ export default function indiumThemePlugin(options: PluginOptions = {}): Plugin {
           });
         }
 
-        // Generate CSS from config
-        let generatedCSS = generateThemeCSS(config);
+        // ⭐ Load config directly with cache-busting (no cache layer needed)
+        // The cache-busting in loadConfig ensures fresh config on every run
+        const config = await loadConfig(cwd);
 
-        // Add timestamp comment to bust Vite CSS cache on config changes
-        // This ensures HMR picks up config changes even if the CSS structure is identical
-        const timestamp = Date.now();
-        generatedCSS = `/* Indium UI theme - updated: ${timestamp} */\n${generatedCSS}`;
+        // Generate CSS from config
+        const generatedCSS = generateThemeCSS(config);
 
         // Parse generated CSS using postcss.parse (synchronous)
         const parsedCSS = postcss.parse(generatedCSS);

@@ -330,9 +330,14 @@ export function flattenSemanticTokens(
       const varName = `--${prefix}-${currentPath.join('-')}`;
 
       if (typeof value === 'string') {
-        // Versuche als Color-Ref zu parsen
-        const cssValue = parseColorRef(value, primitiveColors);
-        result[varName] = cssValue;
+        // Skip properties that are not color values (e.g., box-shadow)
+        if (key === 'shadow') {
+          result[varName] = value; // Pass through as-is
+        } else {
+          // Parse as color reference
+          const cssValue = parseColorRef(value, primitiveColors);
+          result[varName] = cssValue;
+        }
       } else if (
         typeof value === 'object' &&
         value !== null &&

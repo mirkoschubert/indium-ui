@@ -15,8 +15,8 @@ import indiumThemePlugin from '../../postcss-plugin.js';
 /**
  * Process CSS with the Indium theme plugin
  */
-function processCSS(input: string): string {
-  const result = postcss([indiumThemePlugin()]).process(input, {
+async function processCSS(input: string): Promise<string> {
+  const result = await postcss([indiumThemePlugin()]).process(input, {
     from: undefined,
   });
   return result.css;
@@ -27,17 +27,17 @@ function processCSS(input: string): string {
 // ==========================================
 
 describe('PostCSS Plugin - Basic Functionality', () => {
-  it('replaces @indium-theme directive', () => {
+  it('replaces @indium-theme directive', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     // Should not contain @indium-theme anymore
     expect(output).not.toContain('@indium-theme');
   });
 
-  it('generates :root with primitive variables', () => {
+  it('generates :root with primitive variables', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain(':root {');
     expect(output).toContain('--color-gray-');
@@ -46,31 +46,31 @@ describe('PostCSS Plugin - Basic Functionality', () => {
     expect(output).toContain('--font-');
   });
 
-  it('generates light theme with data attribute', () => {
+  it('generates light theme with data attribute', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('[data-theme="light"]');
     expect(output).toContain('color-scheme: light');
   });
 
-  it('generates dark theme with data attribute', () => {
+  it('generates dark theme with data attribute', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('[data-theme="dark"]');
     expect(output).toContain('color-scheme: dark');
   });
 
-  it('generates auto dark mode with media query', () => {
+  it('generates auto dark mode with media query', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('@media (prefers-color-scheme: dark)');
     expect(output).toContain(':root:not([data-theme="light"])');
   });
 
-  it('preserves other CSS rules', () => {
+  it('preserves other CSS rules', async () => {
     const input = `
       @indium-theme;
 
@@ -78,7 +78,7 @@ describe('PostCSS Plugin - Basic Functionality', () => {
         padding: 1rem;
       }
     `;
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('.button');
     expect(output).toContain('padding: 1rem');
@@ -90,9 +90,9 @@ describe('PostCSS Plugin - Basic Functionality', () => {
 // ==========================================
 
 describe('PostCSS Plugin - Primitive Variables', () => {
-  it('generates color primitives', () => {
+  it('generates color primitives', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toMatch(/--color-gray-50:\s*#[a-f0-9]{6}/);
     expect(output).toMatch(/--color-gray-500:\s*#[a-f0-9]{6}/);
@@ -100,18 +100,18 @@ describe('PostCSS Plugin - Primitive Variables', () => {
     expect(output).toMatch(/--color-blue-500:\s*#[a-f0-9]{6}/);
   });
 
-  it('generates spacing primitives', () => {
+  it('generates spacing primitives', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--space-0: 0');
     expect(output).toMatch(/--space-4:\s*[\d.]+rem/);
     expect(output).toMatch(/--space-8:\s*[\d.]+rem/);
   });
 
-  it('generates typography primitives', () => {
+  it('generates typography primitives', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--font-sans:');
     expect(output).toContain('--text-base:');
@@ -119,43 +119,43 @@ describe('PostCSS Plugin - Primitive Variables', () => {
     expect(output).toContain('--tracking-');
   });
 
-  it('generates border radius primitives', () => {
+  it('generates border radius primitives', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--radius-sm:');
     expect(output).toContain('--radius-base:');
     expect(output).toContain('--radius-lg:');
   });
 
-  it('generates shadow primitives', () => {
+  it('generates shadow primitives', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toMatch(/--shadow-sm:\s*0\s+[\d.]+px/);
     expect(output).toMatch(/--shadow-base:\s*0\s+[\d.]+px/);
   });
 
-  it('generates z-index primitives', () => {
+  it('generates z-index primitives', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toMatch(/--z-base:\s*\d+/);
     expect(output).toMatch(/--z-dropdown:\s*\d+/);
     expect(output).toMatch(/--z-modal:\s*\d+/);
   });
 
-  it('generates transition primitives', () => {
+  it('generates transition primitives', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toMatch(/--transition-fast:\s*\d+ms/);
     expect(output).toMatch(/--transition-base:\s*\d+ms/);
   });
 
-  it('generates breakpoint primitives', () => {
+  it('generates breakpoint primitives', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toMatch(/--breakpoint-tablet:\s*\d+px/);
     expect(output).toMatch(/--breakpoint-desktop:\s*\d+px/);
@@ -167,42 +167,42 @@ describe('PostCSS Plugin - Primitive Variables', () => {
 // ==========================================
 
 describe('PostCSS Plugin - Semantic Variables', () => {
-  it('generates semantic text colors', () => {
+  it('generates semantic text colors', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--color-text-primary:');
     expect(output).toContain('--color-text-secondary:');
   });
 
-  it('generates semantic background colors', () => {
+  it('generates semantic background colors', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--color-background-page:');
     expect(output).toContain('--color-background-surface:');
   });
 
-  it('generates semantic action colors', () => {
+  it('generates semantic action colors', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--color-action-primary-normal:');
     expect(output).toContain('--color-action-primary-hover:');
   });
 
-  it('generates semantic feedback colors', () => {
+  it('generates semantic feedback colors', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--color-feedback-success-color:');
     expect(output).toContain('--color-feedback-warning-color:');
     expect(output).toContain('--color-feedback-danger-color:');
   });
 
-  it('generates focus ring variables', () => {
+  it('generates focus ring variables', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--color-focusRing-color:');
     expect(output).toContain('--color-focusRing-shadow:');
@@ -214,9 +214,9 @@ describe('PostCSS Plugin - Semantic Variables', () => {
 // ==========================================
 
 describe('PostCSS Plugin - Typography', () => {
-  it('generates default typography variables', () => {
+  it('generates default typography variables', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain('--typography-default-font-family:');
     expect(output).toContain('--typography-default-font-size:');
@@ -224,9 +224,9 @@ describe('PostCSS Plugin - Typography', () => {
     expect(output).toContain('--typography-default-line-height:');
   });
 
-  it('generates heading variables for h1-h6', () => {
+  it('generates heading variables for h1-h6', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     // Check all headings h1-h6
     for (let i = 1; i <= 6; i++) {
@@ -237,9 +237,9 @@ describe('PostCSS Plugin - Typography', () => {
     }
   });
 
-  it('generates heading sizes with calc()', () => {
+  it('generates heading sizes with calc()', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toMatch(/--heading-h1-size:\s*calc\(/);
     expect(output).toMatch(/--heading-h2-size:\s*calc\(/);
@@ -251,9 +251,9 @@ describe('PostCSS Plugin - Typography', () => {
 // ==========================================
 
 describe('PostCSS Plugin - Theme Switching', () => {
-  it('light theme has different values than dark theme', () => {
+  it('light theme has different values than dark theme', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     // Extract color values from light and dark themes
     // Use more specific regex to avoid matching :root:not([data-theme="dark"])
@@ -267,9 +267,9 @@ describe('PostCSS Plugin - Theme Switching', () => {
     expect(lightMatch![1]).not.toBe(darkMatch![1]);
   });
 
-  it('auto dark mode has same variables as explicit dark theme', () => {
+  it('auto dark mode has same variables as explicit dark theme', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     const explicitDark = output.match(/\[data-theme="dark"\]\s*\{\s*([\s\S]*?)\n\}/);
     const autoDark = output.match(/@media \(prefers-color-scheme: dark\)\s*\{\s*:root:not\(\[data-theme="light"\]\)\s*\{\s*([\s\S]*?)\n  \}\n\}/);
@@ -282,16 +282,16 @@ describe('PostCSS Plugin - Theme Switching', () => {
     expect(autoDark![1]).toContain('color-scheme: dark');
   });
 
-  it('supports :root:not([data-theme="dark"]) for light fallback', () => {
+  it('supports :root:not([data-theme="dark"]) for light fallback', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain(':root:not([data-theme="dark"])');
   });
 
-  it('supports :root:not([data-theme="light"]) for dark fallback', () => {
+  it('supports :root:not([data-theme="light"]) for dark fallback', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     expect(output).toContain(':root:not([data-theme="light"])');
   });
@@ -302,23 +302,23 @@ describe('PostCSS Plugin - Theme Switching', () => {
 // ==========================================
 
 describe('PostCSS Plugin - Error Handling', () => {
-  it('handles missing config gracefully', () => {
+  it('handles missing config gracefully', async () => {
     // Plugin should use defaults if no user config found
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     // Should still generate CSS with defaults
     expect(output).toContain(':root {');
     expect(output).toContain('[data-theme="light"]');
   });
 
-  it('preserves CSS when plugin fails', () => {
+  it('preserves CSS when plugin fails', async () => {
     // This is hard to test without mocking, but the plugin should
     // warn and keep the directive on failure
     const input = '@indium-theme;';
 
     // Normal processing should work
-    expect(processCSS(input)).toBeTruthy();
+    expect(await processCSS(input)).toBeTruthy();
   });
 });
 
@@ -327,9 +327,9 @@ describe('PostCSS Plugin - Error Handling', () => {
 // ==========================================
 
 describe('PostCSS Plugin - Integration', () => {
-  it('generates complete valid CSS', () => {
+  it('generates complete valid CSS', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     // Should not have syntax errors (PostCSS would throw)
     expect(output).toBeTruthy();
@@ -342,7 +342,7 @@ describe('PostCSS Plugin - Integration', () => {
     expect(output).toContain('@media (prefers-color-scheme: dark)');
   });
 
-  it('can be used with other PostCSS plugins', () => {
+  it('can be used with other PostCSS plugins', async () => {
     const input = `
       @indium-theme;
 
@@ -351,7 +351,7 @@ describe('PostCSS Plugin - Integration', () => {
       }
     `;
 
-    const result = postcss([indiumThemePlugin()]).process(input, {
+    const result = await postcss([indiumThemePlugin()]).process(input, {
       from: undefined,
     });
 
@@ -359,9 +359,9 @@ describe('PostCSS Plugin - Integration', () => {
     expect(result.css).toContain('color: var(--color-text-primary)');
   });
 
-  it('generates minifiable CSS', () => {
+  it('generates minifiable CSS', async () => {
     const input = '@indium-theme;';
-    const output = processCSS(input);
+    const output = await processCSS(input);
 
     // Should have proper CSS structure
     expect(output).toMatch(/\{[^}]+\}/); // Has CSS blocks

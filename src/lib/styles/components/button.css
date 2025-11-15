@@ -67,7 +67,7 @@
 /* Focus styles (default for all buttons) */
 .button:focus-visible {
   outline: none;
-  box-shadow: var(--focus-ring);
+  box-shadow: var(--color-focusRing-shadow);
 }
 
 /* Variant: Primary */

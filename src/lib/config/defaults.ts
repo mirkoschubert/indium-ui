@@ -265,10 +265,10 @@ export const defaultConfig: IndiumConfig = {
 						disabled: 'gray.300' // #d1d5db
 					},
 					secondary: {
-						normal: 'gray.200', // #e5e7eb
-						hover: 'gray.300', // #d1d5db
-						active: 'gray.400', // #9ca3af
-						disabled: 'gray.100' // #f3f4f6
+						normal: 'gray.600', // #4b5563 - Better contrast with white text (6.4:1)
+						hover: 'gray.700', // #374151
+						active: 'gray.800', // #1f2937
+						disabled: 'gray.300' // #d1d5db
 					}
 				},
 

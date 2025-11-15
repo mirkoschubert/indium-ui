@@ -65,7 +65,7 @@ export function findConfigFile(cwd: string = process.cwd()): string | null {
 }
 
 /**
- * Dynamically imports a config file
+ * Dynamically imports a config file with cache busting
  * Supports both ESM (export default) and CJS (module.exports)
  *
  * @param configPath - Absolute path to config file
@@ -74,21 +74,21 @@ export function findConfigFile(cwd: string = process.cwd()): string | null {
 async function importConfig(configPath: string): Promise<Partial<IndiumConfig>> {
   try {
     // Use jiti for loading TypeScript config files
-    // jiti compiles TS on-the-fly and doesn't have ESM caching issues
+    // jiti compiles TS on-the-fly and supports TypeScript
     const { createJiti } = await import('jiti');
     const jiti = createJiti(import.meta.url, {
       interopDefault: true,
-      esmResolve: true,
+      moduleCache: false,  // ⭐ Disable module caching (key for HMR)
+      fsCache: false,      // ⭐ Disable file system caching
     });
 
-    // Clear jiti's own cache for this file
-    delete jiti.cache[configPath];
-
-    // Load the config file (works with both .ts and .js)
-    const mod = jiti(configPath);
+    // ⭐ Cache-bust via query string (Tailwind 4 approach)
+    // This bypasses ESM import caching completely
+    const cacheBustedPath = `${configPath}?t=${Date.now()}`;
+    const mod = await jiti.import(cacheBustedPath) as any;
 
     // Handle both ESM (export default) and CJS (module.exports)
-    return mod.default || mod;
+    return (mod.default || mod) as Partial<IndiumConfig>;
   } catch (error) {
     console.error(`Error loading config from ${configPath}:`, error);
     throw new Error(`Failed to load Indium config: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -97,6 +97,7 @@ async function importConfig(configPath: string): Promise<Partial<IndiumConfig>> 
 
 /**
  * Loads user config and deep merges it with defaults
+ * Uses cache-busting to ensure fresh config on every load (enables HMR)
  *
  * @param cwd - Current working directory (defaults to process.cwd())
  * @returns Merged config (defaults + user overrides)
@@ -116,43 +117,6 @@ export async function loadConfig(cwd: string = process.cwd()): Promise<IndiumCon
     return deepMerge(defaultConfig, userConfig);
   } catch (error) {
     console.warn(`Failed to load config, using defaults:`, error);
-    return defaultConfig;
-  }
-}
-
-/**
- * Synchronous version of loadConfig for environments that don't support async
- * Falls back to defaults if user config exists (requires async import)
- *
- * @param cwd - Current working directory (defaults to process.cwd())
- * @returns Default config (or merged if sync import is possible)
- */
-export function loadConfigSync(cwd: string = process.cwd()): IndiumConfig {
-  const configPath = findConfigFile(cwd);
-
-  if (!configPath) {
-    return defaultConfig;
-  }
-
-  try {
-    // For sync loading, we can only use require() for .js/.mjs
-    // .ts files require async compilation, so we fall back to defaults
-    if (configPath.endsWith('.ts')) {
-      console.warn(
-        'TypeScript config files require async loading. Using defaults. ' +
-        'Use loadConfig() instead of loadConfigSync() to enable user config.'
-      );
-      return defaultConfig;
-    }
-
-    // Use require for .js/.mjs (CommonJS/ESM)
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const mod = require(configPath);
-    const userConfig = mod.default || mod;
-
-    return deepMerge(defaultConfig, userConfig);
-  } catch (error) {
-    console.warn(`Failed to load config synchronously, using defaults:`, error);
     return defaultConfig;
   }
 }

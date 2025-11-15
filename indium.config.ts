@@ -16,14 +16,14 @@ export default defineConfig({
 			// Example: Change primary blue to a custom brand color
 			blue: {
 				500: '#0066ee', // Custom primary blue
-				600: '#0000ff', // Custom primary blue hover
+				600: '#0052cc', // Custom primary blue hover
 				700: '#003d7a', // Custom primary blue active
 			},
-			// Example: Add a custom brand color
+			// Example: Add a custom brand color (WCAG AA compliant)
 			brand: {
-				500: '#ff6b35',
-				600: '#e85d2f',
-				700: '#d14f29',
+				500: '#c74a1f', // Darker orange with good contrast (4.6:1 on white)
+				600: '#a33d19', // Darker for hover
+				700: '#7f3014', // Even darker for active
 			},
 		},
 	},

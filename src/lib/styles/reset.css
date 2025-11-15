@@ -137,8 +137,7 @@ table {
 /* Focus visible (modern browsers) */
 :focus-visible {
   outline: none;
-  box-shadow: var(--focus-ring);
-  outline-offset: var(--focus-ring-offset);
+  box-shadow: var(--color-focusRing-shadow);
 }
 
 /* Remove focus styles for mouse users */

@@ -76,7 +76,6 @@ export { defaultConfig } from './defaults.js';
 
 export {
   loadConfig,
-  loadConfigSync,
   findConfigFile,
   deepMerge,
   defineConfig,

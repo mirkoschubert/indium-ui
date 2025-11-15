@@ -15,6 +15,3 @@ export * from './utils/a11y.js';
 
 // Config
 export * from './config/config-loader.js';
-
-// Vite Plugin (for HMR support in user projects)
-export { indiumConfigHMR } from './vite-plugin.js';

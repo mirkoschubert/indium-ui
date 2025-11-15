@@ -3,13 +3,19 @@
 	import '$lib/styles/index.css';
 </script>
 
-<h1>Indium UI - Library Project</h1>
-<p>Testing CSS generation with @indium-theme directive</p>
+<svelte:head>
+	<title>Indium UI - Button Component Tests</title>
+</svelte:head>
 
-<div style="margin: 2rem 0;">
-	<Button>Default Button</Button>
-	<Button variant="secondary">Secondary</Button>
-	<Button variant="outline">Outline</Button>
-</div>
+<main>
+	<h1>Indium UI - Library Project</h1>
+	<p>Testing CSS generation with @indium-theme directive</p>
 
-<p>Check DevTools for CSS variables!</p>
+	<div style="margin: 2rem 0;">
+		<Button>Default Button</Button>
+		<Button variant="secondary">Secondary</Button>
+		<Button variant="outline">Outline</Button>
+	</div>
+
+	<p>Check DevTools for CSS variables!</p>
+</main>
